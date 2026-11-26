@@ -6,9 +6,10 @@ name: CI
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches: [verify/contributor-checks]
+
+permissions:
+  contents: read
 
 jobs:
   web:
@@ -16,6 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: 0014b1c1588adc45d5ec85313e9ca56149ef8a51
+          persist-credentials: false
 
       - name: Install pnpm
         uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
@@ -55,6 +59,9 @@ jobs:
         working-directory: services/api
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: 0014b1c1588adc45d5ec85313e9ca56149ef8a51
+          persist-credentials: false
 
       - name: Install Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
